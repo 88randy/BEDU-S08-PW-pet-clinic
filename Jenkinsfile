@@ -23,16 +23,7 @@ pipeline {
                 publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: false, reportDir: 'target/site/jacoco/', reportFiles: 'index.html', reportName: 'jacaco report', reportTitles: ''])
             }
         }
-        stage('Code Quality') {
-            steps {
-                script {
-                    def scannerHome = tool 'sonarqube';
-                    withSonarQubeEnv("sonarqube") {
-                    sh "${tool("sonarqube")}/bin/sonar-scanner"
-                        }
-                }
-            }
-        }
+    
         stage('Deploy') {
             steps {
                 echo 'Deploy'
