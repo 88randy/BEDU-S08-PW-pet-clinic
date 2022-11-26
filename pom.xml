@@ -307,6 +307,23 @@
 				</dependencies>
 			</plugin>
 		</plugins>
+		<plugin>
+			<groupId>org.owasp</groupId>
+			<artifactId>dependency-check-maven</artifactId>
+			<version>6.2.2</version>
+			<configuration>
+				<format>ALL</format>
+				<failBuildOnCVSS>7</failBuildOnCVSS>
+				<cveValidForHours>168</cveValidForHours>
+			</configuration>
+			<executions>
+				<execution>
+					<goals>
+						<goal>check</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
 	</build>
 
 	<!-- Apache 2 license -->
