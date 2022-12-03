@@ -24,12 +24,17 @@ pipeline {
             }
         }
         stage('Code Quality') {
+            environment {
+                SCANNER_HOME = tool 'Sonar-scanner'
+            }
             steps {
-                script {
-                    def scannerHome = tool 'sonarqube';
-                    withSonarQubeEnv("sonarqube") {
-                        sh "${tool("sonarqube")}"
-                    }
+                withSonarQubeEnv(credentialsId: 'sonar-credentialsId', installationName: 'Sonar') {
+                    sh '''$SCANNER_HOME/bin/sonar-scanner \
+                    -Dsonar.sources=src/ \
+                    -Dsonar.java.binaries=target/classes/ \
+                    -Dsonar.exclusions=src/test/java/****/*.java \
+                    -Dsonar.java.libraries=/var/lib/jenkins/.m2/**/*.jar \
+                    -Dsonar.projectVersion=${BUILD_NUMBER}-${GIT_COMMIT_SHORT}'''
                 }
             }
         }
