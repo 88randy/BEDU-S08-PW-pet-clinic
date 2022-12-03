@@ -29,7 +29,7 @@ pipeline {
             }
             steps {
                 withSonarQubeEnv(credentialsId: 'sonarqube', installationName: 'sonarqube') {
-                    sh '''$SCANNER_HOME/bin/sonar-scanner \
+                    sh '''$SCANNER_HOME/opt/sonar-scanner \
                     -Dsonar.sources=src/ \
                     -Dsonar.java.binaries=target/classes/ \
                     -Dsonar.exclusions=src/test/java/****/*.java \
