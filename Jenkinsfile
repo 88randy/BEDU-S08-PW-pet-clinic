@@ -28,7 +28,7 @@ pipeline {
                 SCANNER_HOME = tool 'Sonar-scanner'
             }
             steps {
-                withSonarQubeEnv(credentialsId: 'sonar-credentialsId', installationName: 'Sonar') {
+                withSonarQubeEnv(credentialsId: 'sonarqube', installationName: 'sonarqube') {
                     sh '''$SCANNER_HOME/bin/sonar-scanner \
                     -Dsonar.sources=src/ \
                     -Dsonar.java.binaries=target/classes/ \
